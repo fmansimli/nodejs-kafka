@@ -45,7 +45,7 @@ services:
     volumes:
       - "kafka_data:/bitnami"
     environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=moove-zookeeper:2181
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=10.251.26.79:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - moove-zookeeper
