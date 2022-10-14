@@ -1466,6 +1466,11 @@ jws@^3.2.2:
     jwa "^1.4.1"
     safe-buffer "^5.0.1"
 
+kafkajs@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/kafkajs/-/kafkajs-2.2.1.tgz#277d96459e25cfd77bb1c6bf792396403912abe8"
+  integrity sha512-f3a4TDeBx0TMIqAnSob64lE4oMOSFDjoycOHzyxISpOzPw5GT2AyX6ibfyUPpt5nTxwGkJSFRxPpidNTd/Uz9Q==
+
 levn@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/levn/-/levn-0.4.1.tgz#ae4562c007473b932a6200d403268dd2fffc6ade"

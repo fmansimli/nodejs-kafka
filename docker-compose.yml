@@ -5,7 +5,7 @@ services:
   #   container_name: moove-node
   #   restart: always
   #   ports:
-  #     - 5377:3007
+  #     - "5377:3007"
   #   depends_on:
   #     - moove-mongo
   #     - moove-redis
@@ -17,15 +17,15 @@ services:
   moove-mongo:
     image: mongo
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
-      - mongo_data:/data/db
+      - "mongo_data:/data/db"
     container_name: moove-mongo
     restart: always
   moove-redis:
     image: redis
     ports:
-      - 6379:6379
+      - "6379:6379"
     container_name: moove-redis
     restart: always
   moove-zookeeper:
@@ -34,7 +34,7 @@ services:
       - "2181:2181"
     container_name: moove-zookeeper
     volumes:
-      - "zookeeper_data:/data/zookeeper"
+      - "zookeeper_data:/bitnami"
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
   moove-kafka:
@@ -43,7 +43,7 @@ services:
       - "9092:9092"
     container_name: moove-kafka
     volumes:
-      - "kafka_data:/data/kafka"
+      - "kafka_data:/bitnami"
     environment:
       - KAFKA_CFG_ZOOKEEPER_CONNECT=moove-zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
