@@ -3,7 +3,7 @@ FROM node:16-alpine
 WORKDIR /app/moove
 
 RUN npm install -g pm2
-RUN npm install -g yarn
+#RUN npm install -g yarn
 
 COPY package.json .
 RUN yarn install
