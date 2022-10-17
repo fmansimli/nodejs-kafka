@@ -8,6 +8,7 @@ export enum RedisKeys {
   TASKS = "tasks",
   EVENTS = "events",
   CITIES = "cities",
+  LOGS = "logs",
 }
 export const REDIS_TABLES = [
   "areas",
@@ -18,4 +19,5 @@ export const REDIS_TABLES = [
   "tasks",
   "events",
   "cities",
+  "logs",
 ];

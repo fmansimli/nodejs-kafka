@@ -2,6 +2,8 @@ import http from "http";
 
 import app from "./app";
 import { MyDatabase, AppConfig } from "./config";
+import { MyKafka } from "./kafka";
+import { listenToLogs } from "./kafka/consumers/logs.consumer";
 
 AppConfig.initialize();
 
@@ -12,9 +14,11 @@ const PORT = process.env.PORT || 5000;
 httpServer.listen(PORT, async () => {
   try {
     await MyDatabase.ping();
-    console.log("@@@@ mongodb connected!");
+    await MyKafka.initialize();
+    listenToLogs();
+    listenToLogs();
   } catch (error: any) {
-    console.log(`$$$ db connection error! (${error.messsage})`);
+    console.log("error! ->", JSON.stringify(error));
   } finally {
     console.log(`@@@@ server is running on http://localhost:${PORT} ...`);
   }

@@ -1,2 +1,2 @@
-export { Logger } from "./log";
+export { Logger } from "./logger";
 export { CacheStorage } from "./caching";
