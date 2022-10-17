@@ -1,21 +1,21 @@
 version: "3.4"
 services:
-  # moove-node:
-  #   build: .
-  #   container_name: moove-node
-  #   restart: always
-  #   ports:
-  #     - "5377:3007"
-  #   depends_on:
-  #     - moove-mongo
-  #     - moove-redis
-  #     - moove-zookeeper
-  #     - moove-kafka
-  #   environment:
-  #     - CONTAINER_SERVICE=Docker
-  #     - NODE_ENV=production
-  #   networks:
-  #     - moove-net
+  moove-node:
+    build: .
+    container_name: moove-node
+    restart: always
+    ports:
+      - "3000:3030"
+    depends_on:
+      - moove-mongo
+      - moove-redis
+      - moove-zookeeper
+      - moove-kafka
+    environment:
+      - CONTAINER_SERVICE=Docker
+      - NODE_ENV=production
+    networks:
+      - moove-net
 
   moove-mongo:
     image: mongo

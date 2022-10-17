@@ -4,7 +4,7 @@ import { sendToLogs } from "../kafka/producers/logs.producer";
 export const getAll: RequestHandler = async (req, res, next) => {
   try {
     const resp = {
-      body: { tasks: [] },
+      body: { logs: ["log1", "log2"] },
       pagination: {},
       meta: {
         url: req.originalUrl,
@@ -22,7 +22,7 @@ export const getAll: RequestHandler = async (req, res, next) => {
 export const getById: RequestHandler = async (req, res, next) => {
   try {
     const resp = {
-      body: { task: {} },
+      body: { log: { title: "log 1" } },
       meta: {
         url: req.originalUrl,
         ok: true,
@@ -41,7 +41,7 @@ export const create: RequestHandler = async (req, res, next) => {
     sendToLogs();
 
     res.status(201).json({
-      body: { task: {} },
+      body: { log: {} },
       meta: {
         url: req.originalUrl,
         ok: true,
@@ -55,7 +55,7 @@ export const create: RequestHandler = async (req, res, next) => {
 export const updateById: RequestHandler = async (req, res, next) => {
   try {
     res.status(200).json({
-      body: { task: {} },
+      body: { log: {} },
       meta: {
         url: req.originalUrl,
         ok: true,

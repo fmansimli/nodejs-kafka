@@ -5,8 +5,8 @@ import { access } from "../middlewares";
 
 const router = Router();
 
-router.get("/", access(), logs.getAll);
-router.get("/:id", access(), logs.getById);
+router.get("/", logs.getAll);
+router.get("/:id", logs.getById);
 
 router.post("/", access(Role.ADMIN), logs.create);
 
