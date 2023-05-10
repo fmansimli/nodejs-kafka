@@ -1,17 +1,33 @@
-FROM node:16-alpine
+FROM node:18-alpine AS builder
 
-WORKDIR /app/moove
+WORKDIR /temp-apps/app
 
+COPY package*.json ./
+
+RUN npm update -g npm
+RUN npm install
+
+COPY . ./
+
+RUN npm run build
+
+# prod stage
+
+FROM node:18-alpine
+WORKDIR /apps/myapp
+
+COPY --from=builder /temp-apps/app/dist ./dist/
+
+COPY package*.json ./
+COPY .env ./
+
+
+ENV HOST_URL http://example.com
+
+RUN npm update -g npm
 RUN npm install -g pm2
-#RUN npm install -g yarn
+RUN npm install
 
-COPY package.json .
-RUN yarn install
+EXPOSE 3001
 
-COPY . .
-
-EXPOSE 3030
-
-RUN yarn build-image
-
-CMD ["yarn","serve:pm2"]
+CMD ["npm","run","serve:pm2"]
