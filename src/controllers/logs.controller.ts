@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-import { sendToLogs } from "../kafka/producers/logs.producer";
 
 export const getAll: RequestHandler = async (req, res, next) => {
   try {
@@ -38,8 +37,6 @@ export const getById: RequestHandler = async (req, res, next) => {
 
 export const create: RequestHandler = async (req, res, next) => {
   try {
-    sendToLogs();
-
     res.status(201).json({
       body: { log: {} },
       meta: {
@@ -69,8 +66,6 @@ export const updateById: RequestHandler = async (req, res, next) => {
 
 export const deleteById: RequestHandler = async (req, res, next) => {
   try {
-    sendToLogs();
-
     res.status(200).json({
       meta: {
         url: req.originalUrl,

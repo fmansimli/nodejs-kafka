@@ -1,34 +1,30 @@
-import kafka from "./client";
+import { Kafka } from "kafkajs";
 
-export class MyKafka {
-  static async initialize() {
-    let admin;
-    try {
-      admin = kafka.admin();
-      await admin.connect();
+class KafkaWrapper {
+  private _client?: Kafka;
 
-      await admin.createTopics({
-        topics: [
-          { topic: "logs", numPartitions: 1 },
-          { topic: "tasks", numPartitions: 1 },
-        ],
-      });
-    } catch (error) {
-      return Promise.reject(error);
-    } finally {
-      admin?.disconnect();
+  get client(): Kafka {
+    if (!this._client) {
+      throw new Error("Kafka client has not been initialized yet!");
     }
+    return this._client;
   }
 
-  static async getProducer() {
-    const producer = kafka.producer();
-    await producer.connect();
-    return producer;
-  }
+  async initialize(url: string, clientId: string) {
+    this._client = new Kafka({ clientId, brokers: [url] });
 
-  static async getConsumer(groupId: string) {
-    const consumer = kafka.consumer({ groupId });
-    await consumer.connect();
-    return consumer;
+    const admin = this._client.admin();
+    await admin.connect();
+
+    await admin.createTopics({
+      topics: [
+        { topic: "logs", numPartitions: 1 },
+        { topic: "tasks", numPartitions: 1 },
+      ],
+    });
+
+    admin.disconnect();
   }
 }
+
+export const kafkaWrapper = new KafkaWrapper();
